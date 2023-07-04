@@ -1,0 +1,13 @@
+[http.middlewares.simpleAuth.basicAuth]
+# Create htpasswd file with "htpasswd -nb user password" command and paste it here
+users = [
+    "USER:password"
+]
+[http.routers.api]
+# Change HOSTNAME to your hostname
+rule = "Host(`HOSTNAME`)"
+entrypoints = ["websecure"]
+middlewares = ["simpleAuth"]
+service = "api@internal"
+[http.routers.api.tls]
+certResolver = "lets-encrypt"
